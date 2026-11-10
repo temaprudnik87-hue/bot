@@ -14,7 +14,7 @@ from keyboards import get_yes_no_inline, get_banks_inline
 from offers import get_all_offers, get_available_offers, format_offers_list
 
 
-BOT_TOKEN = 9173898542:AAHxNgUqYn_u2lnyd7EyYFThx8zAeYuJztQ
+BOT_TOKEN = "9173898542:AAHxNgUqYn_u2lnyd7EyYFThx8zAeYuJztQ"
 OWNER_IDS = [8321550731,5334318285]
 
 logging.basicConfig(level=logging.INFO)
