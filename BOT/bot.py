@@ -8,14 +8,14 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message, CallbackQuery
-from dotenv import load_dotenv
+
 
 from keyboards import get_yes_no_inline, get_banks_inline
 from offers import get_all_offers, get_available_offers, format_offers_list
 
-load_dotenv()
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-OWNER_IDS = [int(x.strip()) for x in os.getenv("OWNER_ID").split(",")]
+
+BOT_TOKEN = 9173898542:AAHxNgUqYn_u2lnyd7EyYFThx8zAeYuJztQ
+OWNER_IDS = [8321550731,5334318285]
 
 logging.basicConfig(level=logging.INFO)
 
