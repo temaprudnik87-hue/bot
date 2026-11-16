@@ -2,6 +2,7 @@ import asyncio
 import logging
 import os
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
@@ -224,7 +225,7 @@ async def process_city(message: Message, state: FSMContext):
 
     username = message.from_user.username or "Не указан"
     user_id = message.from_user.id
-    timestamp = datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+    timestamp = datetime.now(ZoneInfo("Asia/Omsk")).strftime("%d.%m.%Y %H:%M:%S")
 
     application_text = (
         "🔔 НОВАЯ ЗАЯВКА\n\n"
