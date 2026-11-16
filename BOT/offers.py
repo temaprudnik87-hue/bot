@@ -1,4 +1,3 @@
-# Конфигурация офферов по банкам
 OFFERS = {
     "Альфа Банк": [
         {
@@ -54,29 +53,27 @@ OFFERS = {
             "time": "15 минут"
         }
     ],
-
-"Точка Банк": [
+    "Точка Банк": [
         {
             "name": "ИП Точка",
             "payout": 7500,
             "client_payout": 2350,
-            "condition": "Платежное поручение",
+            "condition": "Платёжное поручение",
             "time": "15 минут"
         }
     ],
-
-"УралСиб": [
+    "УралСиб": [
         {
             "name": "ИП УралСиб",
             "payout": 8100,
             "client_payout": 4000,
-            "condition": "Подключение Тарифа",
+            "condition": "Подключение тарифа",
             "time": "15 минут"
         }
     ]
 }
 
-# Дополнительный оффер (не привязан к банку)
+
 ADDITIONAL_OFFERS = [
     {
         "name": "Билайн для бизнеса",
@@ -87,68 +84,44 @@ ADDITIONAL_OFFERS = [
     }
 ]
 
-def get_available_offers(selected_banks):
-    """Возвращает список офферов, которые клиент может оформить"""
-    available = []
-    
-    # Если у клиента нет ИП, показываем только дополнительные офферы
-    if selected_banks == "Нет ИП":
-        return ADDITIONAL_OFFERS
-    
-    # Проходим по всем банкам
-    for bank, offers in OFFERS.items():
-        # Если банк НЕ в списке выбранных, добавляем его офферы
-        if bank not in selected_banks:
-            available.extend(offers)
-    
-    # Добавляем дополнительные офферы
-    available.extend(ADDITIONAL_OFFERS)
-    
-    return available
-
-def format_offers_list(offers):
-    """Форматирует список офферов в читаемый текст"""
-    if not offers:
-        return "К сожалению, нет доступных офферов."
-    
-    text = "📋 Доступные офферы для оформления:\n\n"
-    
-    for i, offer in enumerate(offers, 1):
-        text += f"{i}. {offer['name']}\n"
-        text += f"   💰 Выплата: {offer['client_payout']}₽\n"
-        text += f"   📝 Условие: {offer['condition']}\n"
-        text += f"   ⏱ Время: {offer['time']}\n\n"
-    
-    text += "💡 Для оформления напиши менеджеру в личные сообщения."
-    
-    return text
-
 
 def get_all_offers():
-    all_offers = []
-    for bank, offers in OFFERS.items():
-        all_offers.extend(offers)
-    all_offers.extend(ADDITIONAL_OFFERS)
-    return all_offers
+    """Возвращает все доступные офферы"""
+    available = []
+
+    for offers in OFFERS.values():
+        available.extend(offers)
+
+    available.extend(ADDITIONAL_OFFERS)
+    return available
 
 
 def get_available_offers(selected_banks):
+    """Исключает офферы банков, в которых у клиента уже есть РКО"""
+    if selected_banks == "Нет ИП":
+        return get_all_offers()
+
     available = []
+
     for bank, offers in OFFERS.items():
         if bank not in selected_banks:
             available.extend(offers)
+
     available.extend(ADDITIONAL_OFFERS)
     return available
 
 
 def format_offers_list(offers):
+    """Форматирует список офферов"""
     if not offers:
-        return "К сожалению, нет доступных офферов."
-    text = "📋 Доступные офферы для оформления:\n\n"
+        return "К сожалению, сейчас нет доступных офферов."
+
+    text = "📋 Доступные предложения:\n\n"
+
     for i, offer in enumerate(offers, 1):
         text += f"{i}. {offer['name']}\n"
-        text += f"   💰 Выплата: {offer['client_payout']}₽\n"
+        text += f"   💰 Вознаграждение клиенту: {offer['client_payout']}₽\n"
         text += f"   📝 Условие: {offer['condition']}\n"
         text += f"   ⏱️ Время: {offer['time']}\n\n"
-    text += "💡 Для оформления напиши менеджеру в личные сообщения."
+
     return text
