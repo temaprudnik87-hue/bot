@@ -24,7 +24,7 @@ from offers import (
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 if not BOT_TOKEN:
-    raise RuntimeError("Не задан BOT_TOKEN в переменных окружения")
+    raise RuntimeError("9221454963:AAGUj5sPjlDEhyxJo50cyWJwDiFZaJx1gtM")
 
 OWNER_IDS = [8321550731, 5334318285]
 
